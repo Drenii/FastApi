@@ -1,3 +1,4 @@
+from http.client import HTTPException
 from fastapi import FastAPI, Body
 
 app=FastAPI()
@@ -10,16 +11,18 @@ BOOKS = [
     {'title': 'Title Five', 'author': 'Author Five', 'category': 'math'},
     {'title': 'Title Six', 'author': 'Author Two', 'category': 'math'}
 ]
-
+#READ ALL BOOKS
 @app.get("/books")
 async def read_all_books():
     return BOOKS
 
+#PATH PARAMETERS
 @app.get("/books/{book_title}")
 async def read_book(book_title: str):
     for book in BOOKS:
         if book.get('title').casefold() == book_title.casefold(): 
             return book
+    raise HTTPException(status_code=404, detail="Book not found")
 
 #QUERY PARAMETER EXAMPLE
 @app.get("/books/")
