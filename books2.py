@@ -37,7 +37,7 @@ class BookRequest(BaseModel):
                 "author": "Coding with Dren",
                 "description": "This is a description for that book",
                 "rating": 5,
-                "publish_date": 2022
+                "publish_date": 2023
             }
         }
     }
