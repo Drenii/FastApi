@@ -23,3 +23,11 @@ db_dependency = Annotated[Session, Depends(get_db)]
 @app.get('/')
 async def read_all(db: db_dependency):
     return db.query(Todos).all()
+
+
+@app.post('/todos')
+async def create_todo(todo: Todos, db: db_dependency):
+    db.add(todo)
+    db.commit()
+    db.refresh(todo)
+    return todo
