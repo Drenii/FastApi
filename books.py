@@ -19,11 +19,11 @@ async def read_all_books():
 #PATH PARAMETERS
 @app.get("/books/{book_title}")
 async def read_book(book_title: str):
-    librat=[]
+    books=[]
     for book in BOOKS:
         if book.get('title').casefold() == book_title.casefold(): 
-            librat.append(book)
-    return librat
+            books.append(book)
+    return books
     raise HTTPException(status_code=404, detail="Book not found")
 
 #QUERY PARAMETER EXAMPLE
